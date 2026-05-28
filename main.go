@@ -6,11 +6,11 @@ import (
 
 var gameMap = [][]rune{
 	[]rune("┌────────┐"),
-	[]rune("│........│"),
+	[]rune("│.....⚔..│"),
 	[]rune("│..♟.....│"),
-	[]rune("│........│"),
-	[]rune("│........│"),
-	[]rune("│........│"),
+	[]rune("│....⚔...│"),
+	[]rune("│..⚔.....│"),
+	[]rune("│....⚔...│"),
 	[]rune("│........D"),
 	[]rune("│........│"),
 	[]rune("└────────┘"),
@@ -64,6 +64,10 @@ func isDoor(ch rune) bool {
 	return ch == 'D'
 }
 
+func isKnights(ch rune) bool {
+	return ch == '⚔'
+}
+
 func main() {
 	screen, err := tcell.NewScreen()
 	if err != nil {
@@ -106,6 +110,14 @@ func main() {
 				isWalkable(gameMap[newY][newX]) {
 				playerX, playerY = newX, newY
 				render(screen, playerX, playerY)
+			}
+
+			if isKnights(gameMap[newY][newX]) {
+				playerX, playerY = newX, newY
+				render(screen, playerX, playerY)
+				showMessage(screen, "The other knights see you. You return to your vigil in shame.")
+				screen.PollEvent()
+				return
 			}
 
 			if isDoor(gameMap[newY][newX]) {

@@ -27,4 +27,7 @@ go build ./... && go vet ./...
 ```
 
 ## Current milestone
-Map renders. Tiuri moves. One obstacle to avoid.
+Map renders. Tiuri moves. Door triggers win condition.
+Next: knights with roaming gaze lines using time.Ticker and tcell custom events.
+Knight `⚔` has directional gaze rendered as `·` in muted color.
+If Tiuri steps on gaze tile — game over message.
